@@ -11,6 +11,7 @@
 #include "nextion.h"
 #include "USART.h"
 #include <math.h>
+#include "can.h"
 
 #define MAX_STRING_LENGTH 50
 
@@ -136,10 +137,24 @@ void update_dash(struct CAN_frame *message)
 			printf("ÿ");
 			printf("ÿ");
 		break;
+		
+		case 0x7e8:
+			;
+			uint16_t rpm = (256 * message->data[0] + message->data[1])/4;
+			printf("rpm.val=%d", rpm);
+			printf("ÿ");
+			printf("ÿ");
+			printf("ÿ");
 	
 	}
 	
 
+}
+
+void request_RPM()
+{
+	struct CAN_frame message = {0, HIGH_PRIORITY, 0x7e0, 0x0, 8, {0x02, 0x01, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00 }};
+	MCP2515_sendMessage(message);
 }
 
 

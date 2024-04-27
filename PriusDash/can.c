@@ -58,6 +58,8 @@ void MCP2515_init(const enum MCP2515_BAUD baudRate, const enum MCP2515_CLK_FREQ 
 	MCP2515_setMode(CONFIGURATION_MODE);
 	MCP2515_setBitTiming(baudRate, MCP_FREQ);
 	MCP2515_bitModify(RXB0CTRL, (1<<BUKT), 0xFF); //enable rollover
+	//MCP2515_bitModify(CANCTRL, (1<<3), 0xff); //one shot mode
+ 	/*
 	MCP2515_setMask(MASK0, 0x000007ff);
 	MCP2515_setMask(MASK1, 0x000007ff);
 	MCP2515_setFilter(FILTER0, 0x000003ca, 0);
@@ -66,7 +68,16 @@ void MCP2515_init(const enum MCP2515_BAUD baudRate, const enum MCP2515_CLK_FREQ 
 	MCP2515_setFilter(FILTER3, 0x000005b6, 0);
 	MCP2515_setFilter(FILTER4, 0x000003cb, 0);
 	MCP2515_setFilter(FILTER5, 0x000005a4, 0);
-
+	*/
+	MCP2515_setMask(MASK0, 0x00000700);
+	MCP2515_setMask(MASK1, 0x000007f0);
+	MCP2515_setFilter(FILTER0, 0x00000700, 0);
+	MCP2515_setFilter(FILTER1, 0x00000500, 0);
+	MCP2515_setFilter(FILTER2, 0x00000120, 0);
+	MCP2515_setFilter(FILTER3, 0x000003c0, 0);
+	MCP2515_setFilter(FILTER4, 0x00000000, 0);
+	MCP2515_setFilter(FILTER5, 0x00000000, 0);
+	
 	MCP2515_setMode(NORMAL_MODE);
 }
 
@@ -257,7 +268,7 @@ void MCP2515_getMessage(struct CAN_frame *message)
 		message->dlc = buffer[4] & (0x0f);
 		message->rtr_bit = buffer[4] & (1<<6);
 		MCP2515_readRegs(RXB0D, message->data, message->dlc);
-		MCP2515_bitModify(CANINTF, (1<<RX0IF)|(1<<RX1IF), 0x00);
+		MCP2515_bitModify(CANINTF, (1<<RX0IF), 0x00);
 	}
 	else if (status & (1<<RX1IF))
 	{
@@ -266,8 +277,7 @@ void MCP2515_getMessage(struct CAN_frame *message)
 		message->dlc = buffer[4] & (0x0f);
 		message->rtr_bit = buffer[4] & (1<<6);
 		MCP2515_readRegs(RXB1D, message->data, message->dlc);
-		MCP2515_bitModify(CANINTF, (1<<RX0IF)|(1<<RX1IF), 0x00);
-		PORTC |= (1<<5);
+		MCP2515_bitModify(CANINTF, (1<<RX1IF), 0x00);
 	}
 }
 

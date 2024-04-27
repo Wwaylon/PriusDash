@@ -64,7 +64,7 @@ int main(void)
 	MCP2515_enableInterrupt();
 	DDRD &= ~(1 << 2);
 	PORTD |= (1<<2); //pull up
-	EICRA |= (1<<ISC01);
+	EICRA &= ~(1<<ISC01);
 	EICRA &= ~(1<<ISC00);
 	EIMSK |= (1<<INT0);
 	sei();
@@ -82,6 +82,11 @@ int main(void)
 		{
 			update_dash(message);
 		}
+
+		request_RPM();
+		//uint8_t stat = MCP2515_readStatus();
+		//MCP2515_bitModify(CANINTF, (1<<RX0IF)|(1<<RX1IF), 0x00);
+		//printf("%x\n", stat);
     }
 }
 
