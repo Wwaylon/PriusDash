@@ -60,7 +60,7 @@ void update_dash(struct CAN_frame *message)
 	switch (message->id)
 	{
 		case 0x120:
-			switch ((message->data[3] & 0x03))
+			switch ((message->data[5] & 0x03))
 			{
 				case 0x00:
 				send_command("mode.txt=\"P\"");
@@ -96,16 +96,16 @@ void update_dash(struct CAN_frame *message)
 			switch((message->data[1]) & 0x38)
 			{
 				case 0x00: //off
-				send_command("light.pic=4");
+				send_command("light.pic=2");
 				break;
 				case 0x10: //parkers lights
-				send_command("light.pic=4");
+				send_command("light.pic=43");
 				break;
 				case 0x30: //low beam
-				send_command("light.pic=1");
+				send_command("light.pic=43");
 				break;
 				case 0x38: //high beam
-				send_command("light.pic=1");
+				send_command("light.pic=42");
 				break;
 			}
 		break;
@@ -136,6 +136,7 @@ void update_dash(struct CAN_frame *message)
 			printf("ÿ");
 			printf("ÿ");
 		break;
+	
 	}
 	
 
