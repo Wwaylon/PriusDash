@@ -1,19 +1,14 @@
-/*
- * PriusDash.c
- *
- * Created: 4/25/2024 6:45:57 PM
- * Author : Waylon
- */ 
 #include "config.h"
 #include <avr/io.h>
 #include <stdio.h>
 #include "USART.h"
 #include "nextion.h"
-#include <util/delay.h>
-#include "can.h"
 #include <avr/interrupt.h>
+#include "can.h"
 
 #define BUFFER_SIZE 10
+
+//volatile uint8_t flag = 0;
 
 struct CircularBuffer
 {
@@ -35,8 +30,13 @@ ISR(INT0_vect)
 		cb.tail = (cb.tail + 1) % BUFFER_SIZE;
 	}
 }
-
-
+/*
+ISR(TIMER1_COMPA_vect)
+{
+	// Timer ISR for 50ms interval
+	flag = 1;
+}
+*/
 void bufferInit()
 {
 	cb.head = 0;
@@ -56,6 +56,16 @@ struct CAN_frame *bufferRead()
 		return message;
 	}
 }
+/*
+void timerSetup()
+{
+	// Timer1 setup for 50ms interval
+	TCCR1B |= (1 << WGM12); // CTC mode
+	OCR1A = 1562; // Set compare value for 50ms at 16MHz (16MHz / (prescaler * desired frequency) - 1)
+	TIMSK1 |= (1 << OCIE1A); // Enable compare match interrupt
+	TCCR1B |= (1 << CS12) | (1 << CS10); // Prescaler 1024, start timer
+}
+*/
 
 int main(void)
 {
@@ -67,12 +77,15 @@ int main(void)
 	EICRA &= ~(1<<ISC01);
 	EICRA &= ~(1<<ISC00);
 	EIMSK |= (1<<INT0);
-	sei();
+	sei(); // Enable global interrupts
+
 	bufferInit();
+	//timerSetup(); // Setup timer for 50ms interval used for requesting data but not in use at the moment.
+
 	struct CAN_frame *message;
 	
-    while (1) 
-    {
+	while (1)
+	{
 		if (input_available())
 		{
 			receive_command();
@@ -82,11 +95,5 @@ int main(void)
 		{
 			update_dash(message);
 		}
-
-		request_RPM();
-		//uint8_t stat = MCP2515_readStatus();
-		//MCP2515_bitModify(CANINTF, (1<<RX0IF)|(1<<RX1IF), 0x00);
-		//printf("%x\n", stat);
-    }
+	}
 }
-

@@ -49,24 +49,6 @@ void USART_init(){
 	USART_flush();
 }
 
-void UART_getLine(char* buf, uint8_t n)
-{
-	uint8_t bufIdx = 0;
-	char c;
-
-	do
-	{
-		c = USART_Receive(stdin);
-
-		if (bufIdx < (n - 1)) {
-			buf[bufIdx++] = c;
-		}
-	}
-	while((bufIdx < (n - 1)) && (c != '\r'));
-
-	buf[bufIdx] = '\0';
-}
-
 
 void USART_flush(void)
 {

@@ -15,7 +15,6 @@ uint8_t input_available();
 void receive_command();
 void update_dash(struct CAN_frame *message);
 void send_command(char command[]);
-void request_RPM();
 
 
 
