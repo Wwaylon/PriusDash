@@ -5,7 +5,7 @@ Currently, the dashboard will show:
 - Hybrid Battery SOC
 - Drive Mode (N, D, P, R)
 - Vehicle speed (MPH)
-- RPM (The dash has the functionality to show rpm, but does not have the ability to solicit RPM data from the engine ECU in it's current state.)
+- RPM (The dash has the functionality to show rpm, but does not have the ability to solicit RPM data from the engine ECU in its current state.)
 - Which doors are open (tap bottom right of screen)
 
 ## Hardware
