@@ -8,7 +8,7 @@ Currently, the dashboard will show:
 - RPM (The dash has the functionality to show rpm, but does not have the ability to solicit RPM data from the engine ECU in its current state.)
 - Which doors are open (tap bottom right of screen)
 
-| ![Image 1](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG) | ![Image 2](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG) |
+| ![Image 1](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG) | ![Image 2](https://github.com/Wwaylon/PriusDash/blob/main/images/dash1jpg) |
 |:------------------------------:|:------------------------------:|
 |          Dash in Nextion Editor         |          In use dash         |
 
