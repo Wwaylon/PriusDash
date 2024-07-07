@@ -11,12 +11,12 @@ Currently, the dashboard will show:
 
 <p align="center">
   <img src="https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG" alt="Image 1" width="45%">
-  <img src="https://github.com/Wwaylon/PriusDash/blob/main/images/dash1.jpg" alt="Image 2" width="45%">
+  <img src="https://github.com/Wwaylon/PriusDash/blob/main/images/dash2.jpg" alt="Image 2" width="45%">
 </p>
 
 
 
-| ![Image 1](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG) | ![Image 2](https://github.com/Wwaylon/PriusDash/blob/main/images/dash1.jpg) |
+| ![Image 1](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG) | ![Image 2](https://github.com/Wwaylon/PriusDash/blob/main/images/dash2.jpg) |
 |:------------------------------:|:------------------------------:|
 |          Dash in Nextion Editor         |          In use dash         |
 
