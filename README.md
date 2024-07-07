@@ -8,7 +8,9 @@ Currently, the dashboard will show:
 - RPM (The dash has the functionality to show rpm, but does not have the ability to solicit RPM data from the engine ECU in its current state.)
 - Which doors are open (tap bottom right of screen)
 
-![dash](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG)
+| ![Image 1](https://github.com/Wwaylon/PriusDash/blob/main/images/dash.PNG) | ![Image 2]([path/to/image2.png](https://github.com/Wwaylon/PriusDash/blob/main/images/dash1.PNG)) |
+|:------------------------------:|:------------------------------:|
+|          Image 1 Title         |          Image 2 Title         |
 
 ## Hardware
 Code is written for the atmega328p(common in arduinos) microcontroller and the MCP2515 CAN controller. The screen used is the Nextion 3.5 inch NX4832K035 display and is interfaced by the microcontroller via serial communication using UART. 
